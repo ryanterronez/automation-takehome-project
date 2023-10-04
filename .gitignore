@@ -3,5 +3,4 @@ node_modules/
 /playwright-report/
 /playwright/.cache/
 tests-examples/
-tests/example.spec.ts
 results/results-*.csv
