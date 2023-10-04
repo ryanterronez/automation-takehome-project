@@ -59,6 +59,11 @@ export class ECommercePage {
     return price;
   }
 
+  async getItemLink(): Promise<string> {
+    const link: string = await this.page.url();
+    return link;
+  }
+
   async sortItemsByPriceLowToHigh(items: Items): Promise<Item[]> {
     const itemsSortedByPrice: Item[] = items.payload.sort((a, b) => (a.price < b.price ? -1 : 1));
     const itemsThreeLowestPrices: Item[] = itemsSortedByPrice.slice(0, 3);
@@ -73,9 +78,10 @@ export class ECommercePage {
     const csvWriter = createCsvWriter({
       path: `./results/results-${lastSixDigits}.csv`,
       header: [
-        { id: 'name', title: 'Name' },
+        { id: 'product', title: 'Product' },
         { id: 'price', title: 'Price' },
-        { id: 'description', title: 'Description' },
+        { id: 'searchTerm', title: 'Search Term' },
+        { id: 'linkToProductPage', title: 'Link to Product Page'}
       ]
     });
     await csvWriter.writeRecords(items);
