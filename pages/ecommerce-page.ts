@@ -73,7 +73,6 @@ export class ECommercePage {
   async writeToCsv(items: Item[]) {
     const timestamp = new Date().getTime().toString();
     const lastSixDigits = timestamp.slice(-6);
-    const fs = require('fs');
     const createCsvWriter = require('csv-writer').createObjectCsvWriter;
     const csvWriter = createCsvWriter({
       path: `./results/results-${lastSixDigits}.csv`,
