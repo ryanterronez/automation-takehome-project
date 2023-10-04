@@ -1,5 +1,6 @@
 export default interface Item {
-    name: string;
+    product: string;
     price: string;
-    description: string;
+    searchTerm: string;
+    linkToProductPage: string;
 }

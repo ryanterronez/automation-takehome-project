@@ -17,9 +17,24 @@ test('search item, get prices', async ({ page }) => {
     await ecommercePage.lowestPriceThree.click();
     const priceThree: string = await ecommercePage.getItemPrice();
     const testItems: Item[] = [
-        { name: 'Item 1', price: priceOne, description: 'This is item 1' },
-        { name: 'Item 2', price: priceTwo, description: 'This is item 2' },
-        { name: 'Item 3', price: priceThree, description: 'This is item 3' },
+        {
+            product: 'Product 1',
+            price: priceOne,
+            searchTerm: 'Search Term 1',
+            linkToProductPage: 'https://example.com/product1',
+          },
+          {
+            product: 'Product 2',
+            price: priceTwo,
+            searchTerm: 'Search Term 2',
+            linkToProductPage: 'https://example.com/product2',
+          },
+          {
+            product: 'Product 3',
+            price: priceThree,
+            searchTerm: 'Search Term 3',
+            linkToProductPage: 'https://example.com/product3',
+          },
       ];
     ecommercePage.writeToCsv(testItems);
 });
