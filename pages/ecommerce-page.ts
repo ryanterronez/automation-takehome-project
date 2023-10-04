@@ -1,6 +1,6 @@
 import { type Locator, type Page } from '@playwright/test';
-import Items from './models/search-items.model';
-import Item from './models/item.model';
+import Items from '../models/search-items.model';
+import Item from '../models/item.model';
 
 export class ECommercePage {
   readonly page: Page;
@@ -23,7 +23,7 @@ export class ECommercePage {
     this.dropdownSortBy = page.locator('span.a-dropdown-container');
     this.dropdownItemPriceLowToHigh = page.getByLabel('Price: Low to High').getByText('Price: Low to High');
     this.resultItem = page.locator('div[data-component-type="s-search-result"]');
-    this.lowestPriceOne = this.resultItem.nth(0).locator('a.a-link-normal').nth(0);
+    this.lowestPriceOne = this.resultItem.nth(0).locator('span.a-size-medium');
     this.lowestPriceTwo = this.resultItem.nth(1).locator('a.a-link-normal').nth(1);
     this.lowestPriceThree = this.resultItem.nth(2).locator('a.a-link-normal').nth(2);
     this.itemPriceDollars = page.locator('div#corePriceDisplay_desktop_feature_div').nth(0).locator('span.a-price-whole');
@@ -59,15 +59,18 @@ export class ECommercePage {
     return price;
   }
 
+  async getItem(itemIndex: number, searchTerm: string): Promise<Item> {
+    const item: Locator = this.resultItem.nth(itemIndex).locator('span.a-size-medium');
+    const product: string = await item.innerText();
+    await item.click();
+    const link: string = await this.getItemLink();
+    const price: string = await this.getItemPrice();
+    return new Item(product, price, searchTerm, link);
+  }
+
   async getItemLink(): Promise<string> {
     const link: string = await this.page.url();
     return link;
-  }
-
-  async sortItemsByPriceLowToHigh(items: Items): Promise<Item[]> {
-    const itemsSortedByPrice: Item[] = items.payload.sort((a, b) => (a.price < b.price ? -1 : 1));
-    const itemsThreeLowestPrices: Item[] = itemsSortedByPrice.slice(0, 3);
-    return itemsThreeLowestPrices;
   }
 
   async writeToCsv(items: Item[]) {
