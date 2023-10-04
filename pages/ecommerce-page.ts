@@ -1,5 +1,4 @@
 import { type Locator, type Page } from '@playwright/test';
-import Items from '../models/search-items.model';
 import Item from '../models/item.model';
 
 export class ECommercePage {
@@ -73,12 +72,12 @@ export class ECommercePage {
     return link;
   }
 
-  async writeToCsv(items: Item[]) {
+  async writeToCsv(items: Item[], searchTerm: string) {
     const timestamp = new Date().getTime().toString();
     const lastSixDigits = timestamp.slice(-6);
     const createCsvWriter = require('csv-writer').createObjectCsvWriter;
     const csvWriter = createCsvWriter({
-      path: `./results/results-${lastSixDigits}.csv`,
+      path: `./results/results-${searchTerm}-${lastSixDigits}.csv`,
       header: [
         { id: 'product', title: 'Product' },
         { id: 'price', title: 'Price' },

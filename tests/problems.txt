@@ -30,3 +30,11 @@ getting the price of the items from the dom was problematic, I had to remove a n
 
 There is some inconsistency when clicking on an item and the price it shows, manually I am getting a different number than when playwright
 does it.  This is a todo item, running out of time.
+
+did all the work to get this running with the search term 'laptop', worked good and stable.  Unfortunately when I tried another search term, 'tv'
+I found out that amazon will let you click on an item that has no price.  I am out of time, not sure that I will be able to fix this part.
+
+I think having a better picture of the product under test would have helped a bit, not knowing about the two landing pages, that sometimes the price doesn't show
+in the search results and now that the price doesn't always show on the product page.
+
+It would have been nice to have my amazon business account approved too.
