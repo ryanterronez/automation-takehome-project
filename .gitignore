@@ -4,3 +4,4 @@ node_modules/
 /playwright/.cache/
 tests-examples/
 tests/example.spec.ts
+results/results-*.csv

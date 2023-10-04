@@ -1,0 +1,32 @@
+First issue was my workflow, I created a branch to initiate the repo and then when I went to create
+a PR it created the PR on the Janus repo.  Took me a while, but I ended up abandoning the idea of creating PRs for all
+my changes.  I wanted to do that so I could do "code reviews" on myself and then address the comments with
+well thought out commits.  I abandoned that and just created commits to main in my fork.
+
+Second big issue, amazon.com does not always load the same landing page.  There are two pages that are loaded, with different DOMs.
+So my typical POM was not working and I quickly realized that I would have to have multiple page objects and then tell
+the test to decide which one to use, and that sucks.
+
+Third, the selectors for the dropdown to sort the results were extremely flaky.  They worked about 50% of the time over about 50 test runs.
+
+Fourth...maybe I'll stop keeping count.  The search results showed the price of the items sometimes, but not others.  Not really sure why,
+but this was the last straw where I realized that doing this all through the front end would be very complicated and brittle.
+
+I decided to research my options to send api requests and Amazon has a search api that you can use if you have a business account.
+So I created a businee account for my LLC, but they said it would take 24-48 hours to validate my account before I could request usage
+of the APIs, and that was at about 5pm on Tuesday, 31 hours before the project is due.
+
+I decided that I could work on the later steps of the automation while I was waiting for access.  I created some interfaces for items
+that would be in the search response.  I wrote the logic to write those items to csv files.
+
+It is late and the ahsoka finale is starting soon, so I'll have to start again in the morning.  If I don't have access to the APIs yet,
+then I think I will work on doing some transformations on the csv data and then converting it to a parquet file and uploading to an S3
+in AWS, just for funsies.
+
+Also, I could set up a github actions workflow to run this all in a docker container, so I can put together a docker file and maybe
+a docker compose file to run this stuff.
+
+getting the price of the items from the dom was problematic, I had to remove a newline from the dollars portion of the price
+
+There is some inconsistency when clicking on an item and the price it shows, manually I am getting a different number than when playwright
+does it.  This is a todo item, running out of time.
