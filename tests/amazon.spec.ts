@@ -5,6 +5,7 @@ import Item from '../models/item.model';
 test('search item, get prices', async ({ page }) => {
     const ecommercePage = new ECommercePage(page);
     const searchTerm: string = 'laptop';
+    
     await ecommercePage.goto();
     await ecommercePage.searchItem(searchTerm);
     await ecommercePage.sortSearchResults();

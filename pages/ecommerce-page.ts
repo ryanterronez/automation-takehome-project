@@ -8,9 +8,6 @@ export class ECommercePage {
   readonly dropdownSortBy: Locator;
   readonly dropdownItemPriceLowToHigh: Locator;
   readonly resultItem: Locator;
-  readonly lowestPriceOne: Locator;
-  readonly lowestPriceTwo: Locator;
-  readonly lowestPriceThree: Locator;
   readonly itemPriceDollars: Locator;
   readonly itemPriceCents: Locator;
 
@@ -18,13 +15,9 @@ export class ECommercePage {
     this.page = page;
     this.address = address;
     this.inputSearchText = page.getByRole('textbox', { name: 'Search' });
-    // This locator is very flaky, it works about 50% of the time, thus I will sort the results using an api request instead
     this.dropdownSortBy = page.locator('span.a-dropdown-container');
     this.dropdownItemPriceLowToHigh = page.getByLabel('Price: Low to High').getByText('Price: Low to High');
     this.resultItem = page.locator('div[data-component-type="s-search-result"]');
-    this.lowestPriceOne = this.resultItem.nth(0).locator('span.a-size-medium');
-    this.lowestPriceTwo = this.resultItem.nth(1).locator('a.a-link-normal').nth(1);
-    this.lowestPriceThree = this.resultItem.nth(2).locator('a.a-link-normal').nth(2);
     this.itemPriceDollars = page.locator('div#corePriceDisplay_desktop_feature_div').nth(0).locator('span.a-price-whole');
     this.itemPriceCents = page.locator('div#corePriceDisplay_desktop_feature_div').nth(0).locator('span.a-price-fraction');
   }
